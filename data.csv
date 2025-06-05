@@ -1,0 +1,11 @@
+compound_name,category,similar_compounds,link
+Citral,Terpenes,"Geranial;Neral",https://example.com/citral
+Linalool,Alcohols,"Geraniol;Menthol",https://example.com/linalool
+D-Limonene,Terpenes,"Myrcene;α-Pinene",https://example.com/limonene
+Vanillin,Aromatic Compounds,"Ethylvanillin;Guaiacol",https://example.com/vanillin
+Eugenol,Phenols,"Isoeugenol;Anethole",https://example.com/eugenol
+Menthol,Alcohols,"Menthone;Linalool",https://example.com/menthol
+Ethyl Butyrate,Esters,"Butyl Butyrate;Propyl Butyrate",https://example.com/ethyl-butyrate
+Isoamyl Acetate,Esters,"Ethyl Acetate;Pentyl Acetate",https://example.com/isoamyl-acetate
+Benzaldehyde,Aromatic Aldehydes,"Cinnamaldehyde;Vanillin",https://example.com/benzaldehyde
+Nerolidol,Terpenes,"Farnesol;Linalool",https://example.com/nerolidol

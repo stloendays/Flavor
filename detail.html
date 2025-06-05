@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>化合物详情 - Fruit Compounds</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fontawesome-all.min.css">
+  <style>
+    .detail-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #2d5a27;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      background-color: #e3e9dc;
+      transition: background-color 0.3s;
+    }
+
+    .back-btn:hover {
+      background-color: #d0d9c8;
+    }
+
+    .detail-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+
+    .detail-section {
+      margin-bottom: 2rem;
+    }
+
+    .detail-section h3 {
+      color: #2d5a27;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e3e9dc;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .detail-item {
+      padding: 1rem;
+      background-color: #f8f9f8;
+      border-radius: 4px;
+    }
+
+    .detail-item strong {
+      color: #2d5a27;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .similar-compounds {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .compound-tag {
+      background-color: #e3e9dc;
+      color: #2d5a27;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .compound-tag:hover {
+      background-color: #d0d9c8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>🍊 Fruit Compounds</h2>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+        <li><a href="index.html#search"><i class="fas fa-search"></i> 搜索化合物</a></li>
+        <li><a href="index.html#list"><i class="fas fa-list"></i> 化合物列表</a></li>
+        <li><a href="index.html#about"><i class="fas fa-info-circle"></i> 关于我们</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+      <div class="detail-container">
+        <div class="detail-header">
+          <h1 id="compoundName">化合物详情</h1>
+          <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> 返回列表
+          </a>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-section">
+            <h3>基本信息</h3>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <strong>名称</strong>
+                <span id="name"></span>
+              </div>
+              <div class="detail-item">
+                <strong>分类</strong>
+                <span id="category"></span>
+              </div>
+              <div class="detail-item">
+                <strong>分子式</strong>
+                <span id="formula"></span>
+              </div>
+              <div class="detail-item">
+                <strong>分子量</strong>
+                <span id="molecularWeight"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h3>相似化合物</h3>
+            <div class="similar-compounds" id="similarCompounds">
+              <!-- 相似化合物将通过 JavaScript 动态添加 -->
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h3>详细信息</h3>
+            <div class="detail-item">
+              <strong>描述</strong>
+              <p id="description"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 获取URL参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const compoundId = urlParams.get('id');
+
+    // 加载化合物详情
+    function loadCompoundDetails() {
+      // 这里应该从你的数据源加载数据
+      // 示例数据
+      const compoundData = {
+        name: "示例化合物",
+        category: "水果香气",
+        formula: "C6H12O6",
+        molecularWeight: "180.16",
+        description: "这是一种常见的水果香气化合物，具有甜美的果香特征。",
+        similarCompounds: [
+          { name: "化合物A", id: "1" },
+          { name: "化合物B", id: "2" },
+          { name: "化合物C", id: "3" }
+        ]
+      };
+
+      // 更新页面内容
+      document.getElementById('compoundName').textContent = compoundData.name;
+      document.getElementById('name').textContent = compoundData.name;
+      document.getElementById('category').textContent = compoundData.category;
+      document.getElementById('formula').textContent = compoundData.formula;
+      document.getElementById('molecularWeight').textContent = compoundData.molecularWeight;
+      document.getElementById('description').textContent = compoundData.description;
+
+      // 更新相似化合物
+      const similarCompoundsContainer = document.getElementById('similarCompounds');
+      similarCompoundsContainer.innerHTML = compoundData.similarCompounds
+        .map(compound => `
+          <a href="detail.html?id=${compound.id}" class="compound-tag">
+            ${compound.name}
+          </a>
+        `)
+        .join('');
+    }
+
+    // 页面加载时执行
+    window.onload = loadCompoundDetails;
+  </script>
+</body>
+</html> 
