@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>化合物详情</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">ChemDB</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <section style="padding-top:6rem;">
+    <div id="info" class="card">
+      <h2 id="name">化合物名称</h2>
+      <img src="/img/placeholder.png" alt="结构图" style="max-width:200px;">
+      <p id="basic"></p>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <button class="tab-btn active" data-target="prop">Properties</button>
+      <button class="tab-btn" data-target="syn">Synonyms</button>
+      <button class="tab-btn" data-target="safety">Safety</button>
+      <button class="tab-btn" data-target="bio">BioActivity</button>
+    </div>
+    <div id="prop" class="tab-panel" style="display:block;">属性内容...</div>
+    <div id="syn" class="tab-panel" style="display:none;">别名内容...</div>
+    <div id="safety" class="tab-panel" style="display:none;">安全信息...</div>
+    <div id="bio" class="tab-panel" style="display:none;">生物活性...</div>
+  </section>
+
+  <script>
+  // 根据 id 获取化合物信息
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    if (!id) return;
+    fetch(`/compound?id=${id}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('name').textContent = data.compound_name;
+        document.getElementById('basic').textContent = `CID: ${data.cid} | SMILES: ${data.smiles} | 分子量: ${data.mol_weight}`;
+      });
+  });
+  </script>
+</body>
+</html>

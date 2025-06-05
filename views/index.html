@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>化合物信息库</title>
+  <!-- FontAwesome 图标库 -->
+  <!-- 示例：搜索图标使用 fa-search -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="logo">ChemDB</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="#" onclick="alert('Contact us');">Contact</a>
+    </div>
+  </nav>
+
+  <!-- 欢迎区 -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>欢迎使用化合物信息库</h1>
+      <div class="down-btn" onclick="scrollToContent()">
+        <i class="fas fa-angle-down"></i> <!-- fa-angle-down 向下箭头图标 -->
+      </div>
+    </div>
+  </header>
+
+  <!-- 主内容 -->
+  <section id="mainContent">
+    <h2 style="text-align:center;">开始搜索化合物</h2>
+    <div class="search-box" style="position:relative;">
+      <input id="searchInput" type="text" placeholder="输入化合物名称...">
+      <button onclick="location.href='search.html?keyword='+encodeURIComponent(document.getElementById('searchInput').value)">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </section>
+</body>
+</html>

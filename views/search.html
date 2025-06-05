@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>搜索结果</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">ChemDB</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <section style="padding-top:6rem;">
+    <h2>搜索结果</h2>
+    <div id="results" class="results"></div>
+  </section>
+
+  <script>
+  // 根据 URL 中的关键词查询
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const keyword = params.get('keyword') || '';
+    fetch(`/search?q=${encodeURIComponent(keyword)}`)
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('results');
+        if (data.length === 0) {
+          container.textContent = '没有找到相关化合物';
+          return;
+        }
+        data.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h3>${item.compound_name}</h3>
+            <p>CID: ${item.cid}</p>
+            <p>SMILES: ${item.smiles}</p>
+            <p>分子量: ${item.mol_weight}</p>
+            <a href="compound.html?id=${item.id}">查看详情</a>`;
+          container.appendChild(card);
+        });
+      });
+  });
+  </script>
+</body>
+</html>
